@@ -1,0 +1,178 @@
+/* Catmunity 主题色系统
+ * 设计理念: 温暖治愈系 - 奶茶橘 + 奶油白 + 薄荷清新
+ */
+
+:root {
+  /* ==================== 主色系 ==================== */
+  /* 橘猫橙 - 活力主色 */
+  --color-primary: #ff8c42;
+  --color-primary-light: #ffa666;
+  --color-primary-dark: #e67332;
+  --color-primary-disabled: #ffb88c;
+  --color-primary-glow: rgba(255, 140, 66, 0.3);
+
+  /* Logo 纯色（与主色一致） */
+  --color-logo: #ff8c42;
+
+  /* 奶油白 - 温柔底色 */
+  --color-secondary: #fff5eb;
+  --color-secondary-light: #fffdfa;
+  --color-secondary-dark: #ffe8d6;
+
+  /* 薄荷绿 - 清新点缀 */
+  --color-accent: #7dd3c0;
+  --color-accent-light: #a8e6cf;
+  --color-accent-dark: #5bbfaa;
+
+  /* ==================== 功能色 ==================== */
+  /* 成功 */
+  --color-success: #52c41a;
+  --color-success-bg: #f6ffed;
+
+  /* 警告 */
+  --color-warning: #faad14;
+  --color-warning-bg: #fffbe6;
+
+  /* 错误 */
+  --color-error: #ff4d4f;
+  --color-error-bg: #fff2f0;
+
+  /* 信息 */
+  --color-info: #1890ff;
+  --color-info-bg: #e6f7ff;
+
+  /* ==================== 中性色 ==================== */
+  /* 文字色 - 温暖深棕，不是冷硬纯黑 */
+  --color-text-primary: #4a3728;
+  --color-text-secondary: #7a6352;
+  --color-text-tertiary: #a89080;
+  --color-text-disabled: #c9b8a8;
+
+  /* 边框色 */
+  --color-border: #f0e4d7;
+  --color-border-light: #faf4eb;
+  --color-border-dark: #e0d0c0;
+
+  /* 分割线 */
+  --color-divider: #f5ebe0;
+
+  /* ==================== 背景色 ==================== */
+  --color-bg-page: #fffdf9;
+  --color-bg-container: #ffffff;
+  --color-bg-elevated: #fffcf8;
+  --color-bg-overlay: rgba(74, 55, 40, 0.5);
+
+  /* 毛玻璃效果 */
+  --color-glass: rgba(255, 253, 250, 0.85);
+
+  /* ==================== 装饰光晕 ==================== */
+  --color-glow-orange: rgba(255, 140, 66, 0.15);
+  --color-glow-mint: rgba(125, 211, 192, 0.12);
+  --color-glow-orange-light: rgba(255, 140, 66, 0.1);
+
+  /* ==================== 特殊色 ==================== */
+  /* 底部装饰 */
+  --color-paw: #e0d0c0;
+  --color-paw-center: #ffb88c;
+
+  /* ==================== 阴影色 ==================== */
+  --shadow-color: rgba(74, 55, 40, 0.08);
+  --shadow-color-dark: rgba(74, 55, 40, 0.15);
+
+  /* ==================== 渐变色 ==================== */
+  --gradient-primary: linear-gradient(135deg, #ff8c42 0%, #ffa666 100%);
+  --gradient-warm: linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%);
+  --gradient-fresh: linear-gradient(135deg, #a8e6cf 0%, #7dd3c0 100%);
+
+  /* ==================== 字体 ==================== */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-family-display: 'DIN Alternate', 'PingFang SC', sans-serif;
+
+  /* ==================== 圆角 ==================== */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==================== 间距 ==================== */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* ==================== 动画 ==================== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 主色系 - 暗色模式下保持温暖 */
+    --color-primary: #ff9f5a;
+    --color-primary-light: #ffb380;
+    --color-primary-dark: #e67830;
+    --color-primary-disabled: #805030;
+    --color-primary-glow: rgba(255, 159, 90, 0.4);
+
+    /* Logo 纯色 */
+    --color-logo: #ff9f5a;
+
+    /* 辅助色 - 暗色背景 */
+    --color-secondary: #2a2420;
+    --color-secondary-light: #3a3530;
+    --color-secondary-dark: #1a1510;
+
+    /* 薄荷绿 - 暗色适配 */
+    --color-accent: #6bc4ad;
+    --color-accent-light: #8ad4c0;
+    --color-accent-dark: #50a890;
+
+    /* 功能色 - 暗色适配 */
+    --color-success: #73d13d;
+    --color-warning: #ffc53d;
+    --color-error: #ff7875;
+    --color-info: #69c0ff;
+
+    /* 文字色 - 暗色 */
+    --color-text-primary: #f5ebe0;
+    --color-text-secondary: #c9b8a8;
+    --color-text-tertiary: #a89080;
+    --color-text-disabled: #6a5a4a;
+
+    /* 边框 */
+    --color-border: #3a3530;
+    --color-border-light: #4a4540;
+    --color-border-dark: #2a2520;
+
+    /* 分割线 */
+    --color-divider: #352f28;
+
+    /* 背景 */
+    --color-bg-page: #1a1510;
+    --color-bg-container: #252018;
+    --color-bg-elevated: #2a2420;
+    --color-bg-overlay: rgba(20, 15, 10, 0.7);
+
+    /* 装饰光晕 - 暗色更深 */
+    --color-glow-orange: rgba(255, 159, 90, 0.2);
+    --color-glow-mint: rgba(125, 211, 192, 0.15);
+    --color-glow-orange-light: rgba(255, 159, 90, 0.15);
+
+    /* 玻璃 */
+    --color-glass: rgba(37, 32, 24, 0.9);
+
+    /* 特殊色 */
+    --color-paw: #6a5a4a;
+    --color-paw-center: #805030;
+
+    /* 阴影 */
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-color-dark: rgba(0, 0, 0, 0.5);
+  }
+}
