@@ -1,0 +1,15 @@
+package org.catmunity.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.catmunity.model.entity.Log;
+import org.apache.ibatis.annotations.Mapper;
+
+
+/**
+ * @author dawn
+ * @date 2025-04-10 21:17
+ */
+
+@Mapper
+public interface LogMapper extends BaseMapper<Log> {
+}
