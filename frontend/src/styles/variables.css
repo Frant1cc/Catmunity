@@ -108,6 +108,102 @@
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
   --transition-slow: 400ms ease;
+
+  /* ==================== Vant 组件覆盖 ==================== */
+  /* Popup 底层 - 主色橘猫橙 */
+  --van-popup-background: var(--color-primary);
+  --van-popup-close-icon-color: #fffdf9;
+  --van-popup-close-icon-active-color: var(--color-secondary);
+
+  /* Toast - 主色橘猫橙（整块底色 + 白字，图标颜色和圆形背景强制跟随） */
+  --van-toast-background: var(--color-primary);
+  --van-toast-text-color: #fffdf9;
+  --van-toast-icon-color: #fffdf9;
+  --van-toast-padding: 12px 16px;
+  --van-toast-font-size: 14px;
+  --van-toast-text-min-width: 96px;
+  --van-toast-default-icon-size: 36px;
+  --van-toast-default-icon-color: #fffdf9;
+  --van-toast-default-line-height: 20px;
+  --van-toast-border-radius: 10px;
+
+  /* Toast 图标圆形背景 - 跟随主题色，避免默认白底 */
+  --van-toast-success-icon-background-color: var(--color-primary-dark);
+  --van-toast-success-icon-color: #fffdf9;
+  --van-toast-fail-icon-background-color: var(--color-primary-dark);
+  --van-toast-fail-icon-color: #fffdf9;
+  --van-toast-loading-icon-color: #fffdf9;
+
+  /* Dialog - 主色橘猫橙 */
+  --van-dialog-background: var(--color-primary);
+  --van-dialog-title-text-color: #fffdf9;
+  --van-dialog-message-text-color: #fffdf9;
+  --van-dialog-header-border-color: rgba(255, 253, 249, 0.2);
+  --van-dialog-message-border-color: rgba(255, 253, 249, 0.2);
+  --van-dialog-confirm-button-text-color: #fffdf9;
+  --van-dialog-cancel-button-text-color: #fffdf9;
+  --van-dialog-confirm-button-background: var(--color-primary-dark);
+  --van-dialog-cancel-button-background: var(--color-primary-light);
+  --van-dialog-button-border-color: rgba(255, 253, 249, 0.2);
+
+  /* ActionSheet - 主色橘猫橙 */
+  --van-action-sheet-background: var(--color-primary);
+  --van-action-sheet-header-background: var(--color-primary-dark);
+  --van-action-sheet-item-background: transparent;
+  --van-action-sheet-item-text-color: #fffdf9;
+  --van-action-sheet-item-active-background: var(--color-primary-dark);
+  --van-action-sheet-subname-color: rgba(255, 253, 249, 0.7);
+  --van-action-sheet-cancel-text-color: #fffdf9;
+  --van-action-sheet-header-text-color: #fffdf9;
+  --van-action-sheet-description-color: rgba(255, 253, 249, 0.7);
+  --van-action-sheet-gap-color: rgba(255, 253, 249, 0.1);
+
+  /* ShareSheet - 主色橘猫橙 */
+  --van-share-sheet-background: var(--color-primary);
+  --van-share-sheet-button-background: var(--color-primary);
+  --van-share-sheet-item-background: transparent;
+  --van-share-sheet-item-icon-color: #fffdf9;
+  --van-share-sheet-item-name-color: #fffdf9;
+  --van-share-sheet-title-color: #fffdf9;
+  --van-share-sheet-description-color: rgba(255, 253, 249, 0.7);
+  --van-share-sheet-cancel-text-color: #fffdf9;
+  --van-share-sheet-header-background: var(--color-primary-dark);
+
+  /* Notify - 主色橘猫橙 */
+  --van-notify-primary-background: var(--color-primary);
+  --van-notify-success-background: var(--color-primary);
+  --van-notify-danger-background: var(--color-primary);
+  --van-notify-warning-background: var(--color-primary);
+  --van-notify-text-color: #fffdf9;
+
+  /* Picker - 主色橘猫橙 */
+  --van-picker-background: var(--color-primary);
+  --van-picker-toolbar-background: var(--color-primary-dark);
+  --van-picker-confirm-button-color: #fffdf9;
+  --van-picker-cancel-button-color: #fffdf9;
+  --van-picker-option-text-color: #fffdf9;
+  --van-picker-loading-icon-color: #fffdf9;
+  --van-picker-mask-color: rgba(0, 0, 0, 0.2);
+  --van-picker-option-active-color: rgba(255, 253, 249, 0.15);
+
+  /* Cascader - 主色橘猫橙 */
+  --van-cascader-background: var(--color-primary);
+  --van-cascader-header-background: var(--color-primary-dark);
+  --van-cascader-title-color: #fffdf9;
+  --van-cascader-active-color: #fffdf9;
+  --van-cascader-option-color: rgba(255, 253, 249, 0.7);
+  --van-cascader-tab-active-color: #fffdf9;
+  --van-cascader-tabs-bottom-bar-color: var(--color-secondary);
+
+  /* DropdownMenu - 主色橘猫橙 */
+  --van-dropdown-menu-background: var(--color-primary);
+  --van-dropdown-menu-title-color: #fffdf9;
+  --van-dropdown-menu-title-active-color: var(--color-secondary);
+  --van-dropdown-menu-icon-color: #fffdf9;
+  --van-dropdown-item-background: var(--color-primary);
+  --van-dropdown-item-title-color: #fffdf9;
+  --van-dropdown-item-option-color: rgba(255, 253, 249, 0.7);
+  --van-dropdown-item-option-active-color: var(--color-secondary);
 }
 
 /* 暗色模式 */
@@ -174,5 +270,16 @@
     /* 阴影 */
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-color-dark: rgba(0, 0, 0, 0.5);
+
+    /* Vant Toast - 暗色下保持主色 */
+    --van-toast-background: var(--color-primary);
+    --van-toast-text-color: #f5ebe0;
+
+    /* Vant Dialog - 暗色下保持主色 */
+    --van-dialog-background: var(--color-primary);
+    --van-dialog-title-text-color: #f5ebe0;
+    --van-dialog-message-text-color: #f5ebe0;
+    --van-dialog-confirm-button-text-color: #f5ebe0;
+    --van-dialog-cancel-button-text-color: #f5ebe0;
   }
 }

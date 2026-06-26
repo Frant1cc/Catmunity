@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { showToast } from 'vant'
+import { showToast, showLoadingToast, closeToast } from 'vant'
+import { authApi } from '@/api'
 
 const router = useRouter()
-const username = ref('')
+const identifier = ref('')
 const password = ref('')
 const showPassword = ref(false)
 
-const handleLogin = () => {
-  if (!username.value) {
+const handleLogin = async () => {
+  if (!identifier.value) {
     showToast('请输入账号')
     return
   }
@@ -17,8 +18,22 @@ const handleLogin = () => {
     showToast('请输入密码')
     return
   }
-  showToast('登录成功')
-  router.push('/profile')
+
+  showLoadingToast({ message: '登录中...', forbidClick: true })
+  try {
+    const result = await authApi.login({
+      identifier: identifier.value,
+      password: password.value,
+    })
+    localStorage.setItem('token', result.token)
+    localStorage.setItem('userId', String(result.userId))
+    closeToast()
+    showToast('登录成功')
+    router.push('/profile')
+  } catch {
+    // 错误已由拦截器 toast 提示
+    closeToast()
+  }
 }
 
 const goToRegister = () => {
@@ -53,7 +68,7 @@ const goToRegister = () => {
       <div class="form-wrapper">
         <van-cell-group inset>
           <van-field
-            v-model="username"
+            v-model="identifier"
             placeholder="账号"
             :border="false"
             class="input-field"

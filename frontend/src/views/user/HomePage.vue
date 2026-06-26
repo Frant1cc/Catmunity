@@ -1,16 +1,49 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { showConfirmDialog, showSuccessToast } from 'vant'
+import { authApi } from '@/api'
+
+const router = useRouter()
+
 const tabs = [
-  { name: '档案', path: '/profile' },
+  { name: '档案', path: '/archive' },
   { name: '社区', path: '/community' },
   { name: '问答', path: '/qa' },
-  { name: '拍照', path: '/camera' },
+  { name: '打卡', path: '/camera' },
+  { name: '我的', path: '/profile' },
 ]
+
+const handleLogout = async () => {
+  try {
+    await showConfirmDialog({
+      title: '退出登录',
+      message: '确定要退出登录吗？',
+    })
+  } catch {
+    return // 用户取消
+  }
+
+  try {
+    await authApi.logout()
+  } catch {
+    // 即使接口失败，前端也继续清理登录态
+  }
+
+  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
+  showSuccessToast('已退出登录')
+  router.replace('/login')
+}
 </script>
 
 <template>
   <div class="home-page">
     <div class="header">
       <h1 class="logo">Catmunity</h1>
+      <button class="logout-btn" @click="handleLogout">
+        <span class="logout-icon">🚪</span>
+        <span class="logout-text">退出</span>
+      </button>
     </div>
 
     <div class="content">
@@ -48,6 +81,9 @@ const tabs = [
   background: var(--color-bg-container);
   padding: var(--space-lg) var(--space-xl);
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -55,6 +91,29 @@ const tabs = [
   font-weight: 700;
   color: var(--color-primary-dark);
   margin: 0;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logout-btn:active {
+  background: var(--color-secondary);
+  transform: scale(0.97);
+}
+
+.logout-icon {
+  font-size: 14px;
 }
 
 .content {

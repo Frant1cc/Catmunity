@@ -9,7 +9,7 @@ export default {
       selectorBlackList: ['ignore', 'tab-bar'], // 不转换的选择器
       minPixelValue: 1, // 最小转换值
       mediaQuery: false, // 是否转换媒体查询中的px
-      exclude: [/node_modules/], // 排除的文件
+      exclude: [/node_modules/, /\/admin\//], // 排除的文件（PC 端不走 vw 转换）
     },
   },
 }

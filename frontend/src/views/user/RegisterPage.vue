@@ -1,33 +1,100 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { showToast } from 'vant'
+import { showToast, showSuccessToast } from 'vant'
+import { authApi } from '@/api'
 
 const router = useRouter()
-const username = ref('')
+const identifier = ref('')
+const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
+const code = ref('')
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
+const loading = ref(false)
+const codeSending = ref(false)
+const countdown = ref(0)
 
-const handleRegister = () => {
-  if (!username.value) {
+let timer: ReturnType<typeof setInterval> | null = null
+
+const sendCode = async () => {
+  if (!email.value) {
+    showToast('请先输入邮箱')
+    return
+  }
+  if (codeSending.value || countdown.value > 0) return
+
+  codeSending.value = true
+  try {
+    await authApi.sendRegisterCode(email.value)
+    showSuccessToast('验证码已发送')
+    countdown.value = 60
+    timer = setInterval(() => {
+      countdown.value--
+      if (countdown.value <= 0) {
+        clearInterval(timer!)
+        timer = null
+      }
+    }, 1000)
+  } catch {
+    // error handled by interceptor
+  } finally {
+    codeSending.value = false
+  }
+}
+
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
+
+const handleRegister = async () => {
+  if (!identifier.value) {
     showToast('请输入账号')
+    return
+  }
+  if (!email.value) {
+    showToast('请输入邮箱')
     return
   }
   if (!password.value) {
     showToast('请输入密码')
     return
   }
-  if (password.value.length < 6) {
-    showToast('密码至少6位')
+  if (password.value.length < 8 || password.value.length > 16) {
+    showToast('密码需要8-16位')
+    return
+  }
+  if (!/[a-zA-Z]/.test(password.value) || !/[0-9]/.test(password.value)) {
+    showToast('密码需包含字母和数字')
     return
   }
   if (password.value !== confirmPassword.value) {
     showToast('两次密码不一致')
     return
   }
-  showToast('注册成功')
+  if (!code.value) {
+    showToast('请输入验证码')
+    return
+  }
+
+  loading.value = true
+  try {
+    const res = await authApi.register({
+      identifier: identifier.value,
+      email: email.value,
+      password: password.value,
+      code: code.value,
+    })
+    localStorage.setItem('token', res.token)
+    localStorage.setItem('userId', String(res.userId))
+    showSuccessToast('注册成功')
+    router.replace('/')
+  } catch {
+    // error handled by interceptor
+  } finally {
+    loading.value = false
+  }
 }
 
 const goToLogin = () => {
@@ -62,14 +129,20 @@ const goToLogin = () => {
       <div class="form-wrapper">
         <van-cell-group inset>
           <van-field
-            v-model="username"
+            v-model="identifier"
             placeholder="设置账号"
+            :border="false"
+          />
+          <van-field
+            v-model="email"
+            type="email"
+            placeholder="请输入邮箱"
             :border="false"
           />
           <van-field
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
-            placeholder="设置密码"
+            placeholder="设置密码（8-16位，包含字母和数字）"
             :border="false"
           >
             <template #right-icon>
@@ -90,6 +163,23 @@ const goToLogin = () => {
               </span>
             </template>
           </van-field>
+          <van-field
+            v-model="code"
+            placeholder="验证码"
+            :border="false"
+          >
+            <template #button>
+              <van-button
+                size="small"
+                type="primary"
+                :disabled="countdown > 0 || codeSending"
+                :loading="codeSending"
+                @click="sendCode"
+              >
+                {{ countdown > 0 ? `${countdown}s` : '发送验证码' }}
+              </van-button>
+            </template>
+          </van-field>
         </van-cell-group>
 
         <van-button
@@ -97,6 +187,8 @@ const goToLogin = () => {
           type="primary"
           size="large"
           class="register-btn"
+          :loading="loading"
+          loading-text="注册中..."
           @click="handleRegister"
         >
           注 册
